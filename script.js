@@ -141,6 +141,7 @@ async function fetchCountry() {
      and return
    ============================================================ */
 async function askFieldGuide() {
+  const question = questionInput.value.trim(); if (!currentCountry) { guideResponseEl.textContent = "Explore a country first, then ask your question."; return; } if (!question) { guideResponseEl.textContent = "Type a question first."; return; }
   // TODO: read and validate the question
 
 
@@ -153,7 +154,7 @@ async function askFieldGuide() {
      ---------------------------------------------------------- */
   // TODO: const messages = [ ... ];
 
-
+const messages = [ { role: "system", content: buildSystemPrompt(currentCountry) }, { role: "user", content: question }, ];
   /* ----------------------------------------------------------
      STEP 5: Send the POST request, parse, and display.
      ----------------------------------------------------------
@@ -173,7 +174,20 @@ async function askFieldGuide() {
      - Put that text into guideResponseEl.textContent
      ---------------------------------------------------------- */
   // TODO
+try { 
+    const response = await fetch(OPENAI_URL, {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+       },
+    });
 
+  } catch (err) {
+
+  } finally { 
+    console.log('All done!');
+  }
 
   /* ----------------------------------------------------------
      STEP 6: Make it reliable.
@@ -187,12 +201,30 @@ async function askFieldGuide() {
           - finally: set askBtn.disabled = false
      ---------------------------------------------------------- */
 
-}
+try { 
+    const response = await fetch(OPENAI_URL, {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+       },
+    });
+
+    const data = response.json();
+
+  } catch (err) {
+
+  } finally { 
+    console.log('All done!');
+  }
+  body: JSON.stringify({ model: "gpt-4o", messages: messages });
 
 /* ============================================================
    STEP 4 (helper — already built): the system prompt.
    Read it! This is where the AI gets its rules and facts.
    ============================================================ */
+  
+  
 function buildSystemPrompt(country) {
   const facts = [
     `Country: ${country.names.common}`,
