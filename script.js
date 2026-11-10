@@ -53,7 +53,7 @@ const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 // TODO: askBtn.addEventListener(...)
 const questionInput = document.getElementById("questionInput");
 const askBtn = document.getElementById("askBtn");
-const guideResponseEI = document.getElementById("guideResponseEl");
+const guideResponse = document.getElementById("guideResponse");
 
 askBtn.addEventListener('click', askFieldGuide);
 
