@@ -51,13 +51,18 @@ const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 // TODO: const askBtn = ...
 // TODO: const guideResponseEl = ...
 // TODO: askBtn.addEventListener(...)
+const questionInput = document.getElementById("questionInput");
+const askBtn = document.getElementById("askBtn");
+const guideResponseEI = document.getElementById("guideResponseEl");
 
+askBtn.addEventListener('click', askFieldGuide);
 
 /* ============================================================
    STEP 2 (part 1): Create a variable to remember the country.
    Start it as null (nothing explored yet).
    ============================================================ */
 // TODO: let currentCountry = ...
+let currentCountry = null;
 
 
 // --- Part 1: connect the Explore button (already done) --------
